@@ -25,7 +25,7 @@ namespace RGMotors
                     MessageBox.Show("oCommDriver가 null입니다. 연결 실패.");
                 }
 
-                MessageBox.Show("oCommDriver 생성됨");
+                //MessageBox.Show("oCommDriver 생성됨");
                 
 
                 int connectResult = oCommDriver.Connect("");
@@ -36,7 +36,7 @@ namespace RGMotors
                 }
                 else
                 {
-                    MessageBox.Show("connect 성공!");
+                    //MessageBox.Show("connect 성공!");
                     return oCommDriver;
                 }
             }
@@ -58,16 +58,16 @@ namespace RGMotors
 
             XGCommLib.DeviceInfo oDevice = factory20.CreateDevice();
             oDevice.ucDataType = (byte)'B';
-            oDevice.ucDeviceType = (byte)'W';
+            oDevice.ucDeviceType = (byte)'M';
 
-            
-            //oDevice.lOffset = int.Parse(TextBox_Byteoffset.Text);
-            //oDevice.lSize = int.Parse(TextBox_Biteoffset.Text);
-           
+
+            oDevice.lOffset = 0;
+            oDevice.lSize = 1;
+
 
             oCommDriver.AddDeviceInfo(oDevice);
 
-            //bufWrite[0] = (byte)int.Parse(TextBox_1or0.Text);
+            bufWrite[0] = (byte)x1Value;
             nTotal_len += 1;
 
             byte[] bWriteBuf = new byte[nTotal_len];
@@ -75,7 +75,7 @@ namespace RGMotors
 
             if (1 == oCommDriver.WriteRandomDevice(bWriteBuf))
             {
-                MessageBox.Show("bWriteBuf success");
+                //MessageBox.Show("bWriteBuf success");
             }
             else
             {
@@ -181,7 +181,7 @@ namespace RGMotors
             int nRetn = oCommDriver.Disconnect();
             if (nRetn == 1)
             {
-                MessageBox.Show("Disconnect Success");
+                //MessageBox.Show("Disconnect Success");
             }
             else
             {
